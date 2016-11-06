@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/thehink/discord-psn-status/issues"
   },
-  "homepage": "https://github.com/thehink/discord-psn-status#readme"
+  "homepage": "https://github.com/thehink/discord-psn-status#readme",
+  "dependencies": {
+    "discord.js": "^10.0.1",
+    "psn-api": "git+https://github.com/thehink/psn-api.git"
+  }
 }
