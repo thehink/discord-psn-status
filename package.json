@@ -1,0 +1,24 @@
+{
+  "name": "discord-psn-status",
+  "version": "0.0.1",
+  "description": "Updates your discord status with you psn status",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thehink/discord-psn-status.git"
+  },
+  "keywords": [
+    "discord",
+    "psn",
+    "status"
+  ],
+  "author": "Benjamin Rizk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thehink/discord-psn-status/issues"
+  },
+  "homepage": "https://github.com/thehink/discord-psn-status#readme"
+}
