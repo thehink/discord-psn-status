@@ -24,9 +24,21 @@ const checkOnlineStatus = () => {
         prevGame = game;
         client.user.setGame(game);
       }
+	  
+	  if(presence.onlineStatus === 'online'){
+		  //Update status every minute if online
+		  console.log('Online', 'Updating in 40 seconds');
+		  setTimeout(checkOnlineStatus, 1000*40);
+	  }else{
+		  //update status every 10 minutes if offline
+		  console.log('Offline', 'Updating in 10 minutes');
+		  setTimeout(checkOnlineStatus, 1000*60*10);
+	  }
   })
   .catch(error => {
       console.log(error);
+	  console.log('Error', 'Updating in 20 minutes');
+	  setTimeout(checkOnlineStatus, 1000*60*20); //wait 20 mins if we got an error
   });
 }
 
@@ -35,7 +47,7 @@ psn.login().then(profile => {
       console.log('I am ready!');
       //client.user.setStatus('online');
       checkOnlineStatus();
-      setInterval(checkOnlineStatus, 1000*60*1);
+      //setInterval(checkOnlineStatus, 1000*60*1);
     });
 
     client.login(Config.discord_email, Config.discord_password);
