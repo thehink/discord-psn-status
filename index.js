@@ -28,11 +28,11 @@ const checkOnlineStatus = () => {
 
 	  if(presence.onlineStatus === 'online'){
 		  //Update status every minute if online
-		  console.log('[Online]', 'Updating in 40 seconds');
+		  //console.log('[Online]', 'Updating in 40 seconds');
 		  setTimeout(checkOnlineStatus, 1000*40);
 	  }else{
 		  //update status every 10 minutes if offline
-		  console.log('[Offline]', 'Updating in 10 minutes');
+		  //console.log('[Offline]', 'Updating in 10 minutes');
 		  setTimeout(checkOnlineStatus, 1000*60*10);
 	  }
   })
