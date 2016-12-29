@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const Psn = require('psn-api');
-const client = new Discord.Client();
 const Config = require('./config.json');
+
+const client = new Discord.Client();
 
 let psn = new Psn(Config.psn_email, Config.psn_password);
 
@@ -20,23 +21,23 @@ const checkOnlineStatus = () => {
       }
 
       if(prevGame !== game){
-        console.log('updating game!', prevGame, game);
+        console.log('[Update]', prevGame, '=>', game);
         prevGame = game;
         client.user.setGame(game);
       }
-	  
+
 	  if(presence.onlineStatus === 'online'){
 		  //Update status every minute if online
-		  console.log('Online', 'Updating in 40 seconds');
+		  console.log('[Online]', 'Updating in 40 seconds');
 		  setTimeout(checkOnlineStatus, 1000*40);
 	  }else{
 		  //update status every 10 minutes if offline
-		  console.log('Offline', 'Updating in 10 minutes');
+		  console.log('[Offline]', 'Updating in 10 minutes');
 		  setTimeout(checkOnlineStatus, 1000*60*10);
 	  }
   })
   .catch(error => {
-      console.log(error);
+    console.log(error);
 	  console.log('Error', 'Updating in 20 minutes');
 	  setTimeout(checkOnlineStatus, 1000*60*20); //wait 20 mins if we got an error
   });
