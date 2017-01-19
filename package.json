@@ -23,6 +23,6 @@
   "homepage": "https://github.com/thehink/discord-psn-status#readme",
   "dependencies": {
     "discord.js": "^10.0.1",
-    "psn-api": "git+https://github.com/thehink/psn-api.git"
+    "psn-api": "git+https://github.com/thehink/psn-api.git#f5cf8dc16edb230c222f5e4c7ad85d31145fa8df"
   }
 }
