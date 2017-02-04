@@ -1,6 +1,5 @@
 {
-  "discord_email": "",
-  "discord_password": "",
+  "discord_token": "",
   "psn_email": "",
   "psn_password": ""
 }

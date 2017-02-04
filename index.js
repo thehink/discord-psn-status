@@ -2,7 +2,10 @@ const Discord = require('discord.js');
 const Psn = require('psn-api');
 const Config = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  fetchAllMembers: false,
+  disableEveryone: true
+});
 
 let psn = new Psn(Config.psn_email, Config.psn_password);
 
@@ -51,7 +54,11 @@ psn.login().then(profile => {
       //setInterval(checkOnlineStatus, 1000*60*1);
     });
 
-    client.login(Config.discord_email, Config.discord_password);
+    client.on('disconnect', e => {
+      console.log('Disconnected from discord!', e);
+    });
+
+    client.login(Config.discord_token);
 })
 .catch(error => {
     console.log(error);
