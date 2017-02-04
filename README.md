@@ -8,4 +8,4 @@ Sets your Discord game status based on your playstation status
 1. `node index.js`
 
 ## Issues
-- Doesn't work with Discord two-factor authentication
+- Wont handle disconnects from discord atm
