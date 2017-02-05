@@ -8,8 +8,16 @@ const client = new Discord.Client({
 });
 
 let psn = new Psn(Config.psn_email, Config.psn_password);
-
 let prevGame = null;
+let checkTimeout = null;
+
+const delayCheckOnlineStatus = ms => {
+  if(checkTimeout){
+    clearTimeout(checkTimeout);
+  }
+  checkTimeout = setTimeout(checkOnlineStatus, ms);
+}
+
 const checkOnlineStatus = () => {
   psn.getProfile({
       user: "me"
@@ -31,30 +39,34 @@ const checkOnlineStatus = () => {
 
 	  if(presence.onlineStatus === 'online'){
 		  //Update status every minute if online
-		  //console.log('[Online]', 'Updating in 40 seconds');
-		  setTimeout(checkOnlineStatus, 1000*40);
+		  //console.log('[Online]', 'Updating in 60 seconds');
+		  delayCheckOnlineStatus(1000*60);
 	  }else{
 		  //update status every 10 minutes if offline
 		  //console.log('[Offline]', 'Updating in 10 minutes');
-		  setTimeout(checkOnlineStatus, 1000*60*10);
+		  delayCheckOnlineStatus(1000*60*10);
 	  }
   })
   .catch(error => {
     console.log(error);
 	  console.log('Error', 'Updating in 20 minutes');
-	  setTimeout(checkOnlineStatus, 1000*60*20); //wait 20 mins if we got an error
+	  delayCheckOnlineStatus(1000*60*20); //wait 20 mins if we got an error
   });
 }
 
 psn.login().then(profile => {
     client.on('ready', () => {
-      console.log('I am ready!');
+      console.log('Connected to discord!');
       //client.user.setStatus('online');
       checkOnlineStatus();
       //setInterval(checkOnlineStatus, 1000*60*1);
     });
 
     client.on('disconnect', e => {
+      if(checkTimeout){
+        clearTimeout(checkTimeout);
+        checkTimeout = null;
+      }
       console.log('Disconnected from discord!', e);
     });
 
